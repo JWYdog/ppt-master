@@ -11,3 +11,4 @@
 #   pip install -r skills/ppt-master/requirements.txt   # from anywhere / 任意位置
 #
 -r skills/ppt-master/requirements.txt
+-r skills/word-master/requirements.txt

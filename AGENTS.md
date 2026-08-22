@@ -4,6 +4,11 @@ This file is the project entry point for general AI agents.
 
 **You MUST read [`skills/ppt-master/SKILL.md`](skills/ppt-master/SKILL.md) before any PPT generation task or repo modification.** It owns global execution discipline and points to the route selector; after routing, the selected runtime authority owns its steps, gates, and commands.
 
+For Word/DOCX creation, templating, filling, or revision, read
+[`skills/word-master/SKILL.md`](skills/word-master/SKILL.md) after the repository
+entry requirements above. Word Master owns a separate flowing-document
+lifecycle and must not enter the PPT SVG pipeline.
+
 **Repository execution anchor**: resolve the absolute repository root from this
 file's supplied path and retain the absolute `skills/ppt-master` root before the
 first command. Paths in this file are repository-relative notation only; invoke
@@ -18,6 +23,11 @@ command provides a compact view.
 ## Project Overview
 
 PPT Master turns source material into natively editable DrawingML PPTX. Generate has two mutually exclusive runtimes: Default Strategist → Image_Generator → Executor, and self-contained Quick without separate strategy/confirmation. Beautify selects from explicit Quick intent; Image to PPTX always uses Quick.
+
+Word Master is an independent routed workflow for native DOCX. It uses Document
+Strategist → DOCX Executor → structural validation → full-page render review,
+with separate routes for generation, reusable templates, native template fill,
+and native revision.
 
 **Route selection authority**: [`skills/ppt-master/workflows/routing.md`](skills/ppt-master/workflows/routing.md) owns the four top-level artifact routes: Generate PPTX, Create Template, Fill Native PPTX, and Enhance Native PPTX. Child workflows, profiles, stages, and governance documents refine one selected route; they are not competing top-level routes.
 
@@ -50,6 +60,8 @@ PPT Master turns source material into natively editable DrawingML PPTX. Generate
 - This repository is a workflow/skill package, not an app or service scaffold.
 - Do NOT assume generic-project conventions like `.worktrees/`, `tests/`, or mandatory branch setup unless the user explicitly requests them.
 - On conflict with a generic coding skill, prioritize [`skills/ppt-master/SKILL.md`](skills/ppt-master/SKILL.md) inside this repository.
+- PPTX and DOCX requests select their own skill and route authority; never pass
+  a Word artifact through the SVG presentation pipeline.
 
 ## Command Quick Reference
 
@@ -111,6 +123,10 @@ For serial post-processing and export, follow [`generate-pptx.md`](skills/ppt-ma
 ## Core Directories
 
 - `skills/ppt-master/SKILL.md` — global discipline and route-entry authority.
+- `skills/word-master/SKILL.md` — Word/DOCX route-entry authority.
+- `skills/word-master/workflows/` — DOCX lifecycle runbooks.
+- `skills/word-master/references/` — Word role, project, and quality contracts.
+- `skills/word-master/scripts/` — Word project, structure, and render tooling.
 - `skills/ppt-master/workflows/generate-pptx.md` — Generate PPTX Step 1–7 authority.
 - `skills/ppt-master/references/` — role cores plus conditionally loaded role and technical modules.
 - `skills/ppt-master/scripts/` — runnable tool scripts.
